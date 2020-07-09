@@ -7,13 +7,13 @@ export const environment: IEnvironment = {
   production: false,
   baseUrl: 'http://localhost:5000/api',
   MSAL: {
-    clientID: 'Enter_Your_Appid',
+    clientID: '28535f1e-7b9d-4a93-9be2-e11d2d6412f0',
     redirectUri: 'http://localhost:55065',
     cacheLocation: 'localStorage',
     piiLoggingEnabled: true,
     authority: 'https://login.microsoftonline.com/common',
     validateAuthority: true,
-    protectedResourceMap: [['http://localhost:5000/api', ['Enter_Your_Appid']]]
+    protectedResourceMap: [['http://localhost:5000/api', ['28535f1e-7b9d-4a93-9be2-e11d2d6412f0']]]
   }
 };
 
