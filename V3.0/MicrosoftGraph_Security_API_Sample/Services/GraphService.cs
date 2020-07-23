@@ -195,6 +195,26 @@ namespace MicrosoftGraph_Security_API_Sample.Services
             }
         }
 
+        public async Task<IList<Device>> GetDevicesListAsync()
+        {
+            _graphClient.BaseUrl = this.GraphBetaUrl;
+
+            var result = await _graphClient.Devices
+                                    .Request()
+                                    .Filter("isManaged eq true and isCompliant eq false and accountEnabled eq true")
+                                    .Select("displayName, deviceId, approximateLastSignInDateTime, " +
+                                            "deviceCategory, managementType, accountEnabled, " +
+                                            "isCompliant, isManaged, enrollmentType, " +
+                                            "operatingSystem, operatingSystemVersion")
+                                    .GetAsync();
+            if(result != null)
+            {
+                return result;
+            }
+
+            return null;
+        }
+
         private static async Task<DirectoryObject> ManagerAsync(string principalName, GraphServiceClient _graphClient)
         {
             try
@@ -1006,6 +1026,6 @@ namespace MicrosoftGraph_Security_API_Sample.Services
             return alerts != null && alerts.Item1 != null
                 ? alerts.Item1.Select(alert => alert.Category).ToArray().Distinct()
                 : empty;
-        }
+        }        
     }
 }

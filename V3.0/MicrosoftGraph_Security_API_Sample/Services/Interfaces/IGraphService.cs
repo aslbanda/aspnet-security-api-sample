@@ -28,6 +28,8 @@ namespace MicrosoftGraph_Security_API_Sample.Services.Interfaces
 
         Task<UserAccountDevice> GetUserDetailsAsync(string principalName, bool populatePicture = false, bool populateManager = false, bool populateDevices = false);
 
+        Task<IList<Device>> GetDevicesListAsync();
+
         Task<Device> GetDeviceDetailsAsync(string id);
 
         Task<Alert> UpdateAlertAsync(Alert alert, AlertUpdateRequest updateAlertModel);

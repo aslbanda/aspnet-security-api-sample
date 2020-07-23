@@ -29,11 +29,13 @@ import { DashboardPageModule } from './components/pages/dashboard/dashboard.modu
 import { SecureScorePageModule } from './components/pages/secure-score/secure-score.module';
 // subscriptions page
 import { SubscriptionsPageModule } from './components/pages/subscriptions/subscriptions.module';
+// devices page
+import { DeviceModule } from './components/pages/devices/devices.module';
 
 @NgModule({
   declarations: [
     // common
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,6 +54,7 @@ import { SubscriptionsPageModule } from './components/pages/subscriptions/subscr
     ActionsPageModule,
     SecureScorePageModule,
     DashboardPageModule,
+    DeviceModule
   ],
   providers: [
     {

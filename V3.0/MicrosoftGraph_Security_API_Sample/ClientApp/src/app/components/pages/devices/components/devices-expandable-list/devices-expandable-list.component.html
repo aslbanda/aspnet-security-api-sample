@@ -1,0 +1,11 @@
+<header class="main-container" (click)="toggle()" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="header-cols">
+        <span class="device-list-20-col">{{device.deviceId}}</span>
+        <span class="device-list-10-col">{{device.displayName}}</span>
+        <span class="device-list-20-col">{{device.approximateLastSignInDateTime}}</span>
+        <span class="device-list-10-col">{{device.operatingSystem}}</span>
+        <span class="device-list-20-col">{{device.operatingSystemVersion}}</span>
+        <span class="device-list-10-col">{{device.deviceCategory}}</span>
+        <span class="device-list-10-col">{{device.enrollmentType}}</span>
+    </div>
+</header>

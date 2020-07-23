@@ -6,7 +6,7 @@ import { Component, HostBinding } from '@angular/core';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-    public title = 'Microsoft Graph Security Demo';
+    public title = 'Security Demo';
 
     @HostBinding('class.header-container') hostClass = true;
 }

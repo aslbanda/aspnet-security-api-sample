@@ -9,7 +9,9 @@ import { AlertDetailsComponent } from '../components/pages/alert-details/alert-d
 import { ActionsComponent } from '../components/pages/actions/actions.component';
 import { SubscriptionsComponent } from '../components/pages/subscriptions/subscriptions.component';
 import { SecureScoreComponent } from '../components/pages/secure-score/secure-score.component';
+import { DeviceComponent } from '../components/pages/devices/devices.components';
 import { InvokeActionFormComponent } from '../components/pages/actions/invoke-action-form/invoke-action-form.component';
+import { from } from 'rxjs';
 
 
 const routes: Routes = [
@@ -51,6 +53,11 @@ const routes: Routes = [
   {
     path: 'secure-score',
     component: SecureScoreComponent,
+    canActivate: [MsalGuard]
+  },
+  {
+    path: 'devices',
+    component: DeviceComponent,
     canActivate: [MsalGuard]
   },
   {
