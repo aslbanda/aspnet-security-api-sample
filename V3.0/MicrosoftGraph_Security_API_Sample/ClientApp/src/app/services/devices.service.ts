@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 
 //models
-import { Device } from '../models/graph/device.model';
+import { ManagedDevice } from '../models/graph/managed-device.model';
+import {DeviceComplianceResponse} from '../models/response/device-compliance-model';
 
 //services
 import { HttpService } from './http.service';
@@ -14,7 +15,11 @@ export class DevicesService {
         private http: HttpService
     ){}
 
-    getNCDeviceList(): Observable<Device[]> {
-        return this.http.get<Device[]>('devices/GetNCDeviceList');
+    getNCDeviceList(): Observable<ManagedDevice[]> {
+        return this.http.get<ManagedDevice[]>('devices/GetNCDeviceList');
+    }
+
+    getNCDetailsForChart(): Observable<DeviceComplianceResponse> {
+        return this.http.get<DeviceComplianceResponse>('devices/GetDeviceComplianceDetails');
     }
 }

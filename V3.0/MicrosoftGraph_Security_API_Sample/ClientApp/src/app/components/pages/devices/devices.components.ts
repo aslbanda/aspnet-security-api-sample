@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 // models
 import { BreadcrumbItem } from '../../common/content-header/breadcrumbs/breadcrumbs.component';
-import { Device } from '../../../models/graph/device.model';
+import { ManagedDevice } from '../../../models/graph/managed-device.model';
 import { Queries } from 'src/app/models/response';
+import { DeviceComplianceResponse } from '../../../models/response/device-compliance-model';
 // services
 import { DevicesService } from 'src/app/services/devices.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { from } from 'rxjs';
 
 @Component({
     selector: 'app-device-page',
@@ -15,8 +17,9 @@ import { LoaderService } from 'src/app/services/loader.service';
 
 export class DeviceComponent implements OnInit {
 
-    public devices: Device[];
+    public devices: ManagedDevice[];
     public isExpandedAll = false;
+    public doughnutData: DeviceComplianceResponse;
 
     public title = 'Devices';
     public breadcrumbItems: BreadcrumbItem[] = [
@@ -33,6 +36,7 @@ export class DeviceComponent implements OnInit {
 
     ngOnInit(): void{
         this.getUserDetails();
+        this.getNonCompliantDevices();
     }
 
     expandAll(): void {
@@ -44,10 +48,17 @@ export class DeviceComponent implements OnInit {
         this.deviceService.getNCDeviceList().subscribe(response => {
             if(response) {
                 this.devices = response;
-                console.log(response);
             }
 
             this.loader.Hide();
-        })
+        });
+    }
+
+    getNonCompliantDevices(): void {
+        this.deviceService.getNCDetailsForChart().subscribe(response => {
+            if(response){
+                this.doughnutData = response;
+            }
+        });
     }
 }

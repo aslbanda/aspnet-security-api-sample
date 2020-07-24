@@ -12,6 +12,7 @@ using MicrosoftGraph_Security_API_Sample.Models;
 using MicrosoftGraph_Security_API_Sample.Models.Configurations;
 using MicrosoftGraph_Security_API_Sample.Models.DomainModels;
 using MicrosoftGraph_Security_API_Sample.Models.Requests;
+using MicrosoftGraph_Security_API_Sample.Models.Responses;
 using MicrosoftGraph_Security_API_Sample.Providers;
 using MicrosoftGraph_Security_API_Sample.Services.Interfaces;
 using Newtonsoft.Json;
@@ -195,18 +196,19 @@ namespace MicrosoftGraph_Security_API_Sample.Services
             }
         }
 
-        public async Task<IList<Device>> GetDevicesListAsync()
+        public async Task<IList<ManagedDevice>> GetNonCompliantDevicesListAsync()
         {
             _graphClient.BaseUrl = this.GraphBetaUrl;
 
-            var result = await _graphClient.Devices
+            var result = await _graphClient.DeviceManagement.ManagedDevices
                                     .Request()
-                                    .Filter("isManaged eq true and isCompliant eq false and accountEnabled eq true")
-                                    .Select("displayName, deviceId, approximateLastSignInDateTime, " +
-                                            "deviceCategory, managementType, accountEnabled, " +
-                                            "isCompliant, isManaged, enrollmentType, " +
-                                            "operatingSystem, operatingSystemVersion")
+                                    .Filter("complianceState eq 'noncompliant'")
+                                    .Select("serialNumber, deviceName, operatingSystem, " +
+                                            "osVersion, deviceEnrollmentType, deviceCategoryDisplayName, " +
+                                            "usersLoggedOn, managementAgent, deviceType, " +
+                                            "userPrincipalName, lastSyncDateTime, userDisplayName")
                                     .GetAsync();
+
             if(result != null)
             {
                 return result;
@@ -1026,6 +1028,29 @@ namespace MicrosoftGraph_Security_API_Sample.Services
             return alerts != null && alerts.Item1 != null
                 ? alerts.Item1.Select(alert => alert.Category).ToArray().Distinct()
                 : empty;
-        }        
+        }
+
+        public async Task<DeviceComplianceResponse> GetDeviceComplianceForChartAsync()
+        {
+            _graphClient.BaseUrl = this.GraphBetaUrl;
+
+            var result = await _graphClient.DeviceManagement.ManagedDevices
+                                    .Request()
+                                    .GetAsync();
+            if (result != null)
+            {
+                var nonCompliant = result.Where(p => p.ComplianceState == ComplianceState.Noncompliant);
+                
+                DeviceComplianceResponse response = new DeviceComplianceResponse
+                {
+                    NonCompliant = nonCompliant?.Count(),
+                    Compliant = nonCompliant == null ? (double?)null : result.Count - nonCompliant.Count()
+                };
+
+                return response;
+            }
+
+            return null;
+        }
     }
 }

@@ -3,19 +3,28 @@
       <div class="header-title"> {{ title }} </div>
     </app-content-header>
     <div class="actions">
+      <div class="info-bar">
+        <div class="diagrams">
+          <div class="doughnut-container">
+            <device-doughnut-diagram isDevicePage="true" [doughnutData]="doughnutData">
+            </device-doughnut-diagram>
+          </div>          
+        </div>
+      </div>
       <div class="list-toolbar">
         <div class="list-toolbar-title">Non-Compliant Devices</div>
       </div>
       <div class="actions-list">
         <perfect-scrollbar fxFlex>
           <div class="list-header">
-            <span class="device-list-20-col">Device ID</span>
             <span class="device-list-10-col">Device Name</span>
+            <span class="device-list-20-col">User Display Name</span>
             <span class="device-list-20-col">Last Signed-in</span>
             <span class="device-list-10-col">Operating System</span>
             <span class="device-list-20-col">OS Version</span>
             <span class="device-list-10-col">Device Category</span>
             <span class="device-list-10-col">Enrollment Type</span>
+            <span class="expand-all" (click)="expandAll()">{{ isExpandedAll ? 'Collapse All' : 'Expand All' }}</span>
           </div>
           <devices-expandable-list *ngFor="let device of devices" [device]="device" [isExpanded]="isExpandedAll">
           </devices-expandable-list>

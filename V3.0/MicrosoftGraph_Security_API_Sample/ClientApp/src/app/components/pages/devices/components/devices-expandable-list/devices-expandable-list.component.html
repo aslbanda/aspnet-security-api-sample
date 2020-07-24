@@ -1,11 +1,41 @@
 <header class="main-container" (click)="toggle()" [ngClass]="{ 'expanded': isExpanded }">
     <div class="header-cols">
-        <span class="device-list-20-col">{{device.deviceId}}</span>
-        <span class="device-list-10-col">{{device.displayName}}</span>
-        <span class="device-list-20-col">{{device.approximateLastSignInDateTime}}</span>
+        <span class="device-list-10-col">{{device.deviceName}}</span>
+        <span class="device-list-20-col">{{device.userDisplayName}}</span>
+        <span class="device-list-20-col">{{device.usersLoggedOn[0].lastLogOnDateTime}}</span>
         <span class="device-list-10-col">{{device.operatingSystem}}</span>
-        <span class="device-list-20-col">{{device.operatingSystemVersion}}</span>
-        <span class="device-list-10-col">{{device.deviceCategory}}</span>
-        <span class="device-list-10-col">{{device.enrollmentType}}</span>
+        <span class="device-list-20-col">{{device.osVersion}}</span>
+        <span class="device-list-10-col">{{device.deviceCategoryDisplayName}}</span>
+        <span class="device-list-10-col">{{device.deviceEnrollmentType}}</span>
     </div>
+    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 6.09766L11.3613 0.736328L11.8887 1.26367L6 7.15234L0.111328 1.26367L0.638672 0.736328L6 6.09766Z"
+            fill="black" fill-opacity="0.8" />
+    </svg>
 </header>
+<div class="expandable-content" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="left-part">
+        <div class="grey-container">
+            <div class="row">
+                <span class="title">Management Agent</span>
+                <span class="info">{{device.managementAgent}}</span>
+            </div>
+            <div class="row">
+                <span class="title">User Principal Name</span>
+                <span class="info">{{device.userPrincipalName}}</span>
+            </div>
+        </div>        
+    </div>
+    <div class="right-part">
+        <div class="grey-container">
+            <div class="row">
+                <span class="title">Device Type</span>
+                <span class="info">{{device.deviceType}}</span>
+            </div>
+            <div class="row">
+                <span class="title">Last Synced Date</span>
+                <span class="info">{{device.lastSyncDateTime}}</span>
+            </div>
+        </div>
+    </div>
+</div>

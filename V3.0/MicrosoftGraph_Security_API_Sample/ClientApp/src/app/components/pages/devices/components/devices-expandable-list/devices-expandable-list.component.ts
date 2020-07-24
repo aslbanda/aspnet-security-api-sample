@@ -1,6 +1,6 @@
 import { Component, Input, AfterContentInit } from '@angular/core';
 // models
-import { Device } from 'src/app/models/graph/device.model';
+import { ManagedDevice } from 'src/app/models/graph/managed-device.model';
 
 @Component({
     selector: 'devices-expandable-list',
@@ -8,7 +8,7 @@ import { Device } from 'src/app/models/graph/device.model';
     styleUrls: ['./devices-expandable-list.component.css']
 })
 export class DevicesListComponent implements AfterContentInit {
-    @Input() public device: Device;
+    @Input() public device: ManagedDevice;
     @Input() public isExpanded = false;
 
     ngAfterContentInit() {

@@ -8,6 +8,7 @@ using Microsoft.Graph;
 using MicrosoftGraph_Security_API_Sample.Models;
 using MicrosoftGraph_Security_API_Sample.Models.DomainModels;
 using MicrosoftGraph_Security_API_Sample.Models.Requests;
+using MicrosoftGraph_Security_API_Sample.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace MicrosoftGraph_Security_API_Sample.Services.Interfaces
 
         Task<UserAccountDevice> GetUserDetailsAsync(string principalName, bool populatePicture = false, bool populateManager = false, bool populateDevices = false);
 
-        Task<IList<Device>> GetDevicesListAsync();
+        Task<IList<ManagedDevice>> GetNonCompliantDevicesListAsync();
 
         Task<Device> GetDeviceDetailsAsync(string id);
 
@@ -59,5 +60,7 @@ namespace MicrosoftGraph_Security_API_Sample.Services.Interfaces
         Task<Dictionary<string, IEnumerable<string>>> GetUserPrincipalNameFilterAsync();
 
         Task<IEnumerable<SecureScoreControlProfileModel>> GetSecureScoreControlProfilesAsync();
+
+        Task<DeviceComplianceResponse> GetDeviceComplianceForChartAsync();
     }
 }
