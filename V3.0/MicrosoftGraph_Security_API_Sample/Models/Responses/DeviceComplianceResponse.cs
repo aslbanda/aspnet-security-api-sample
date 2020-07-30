@@ -10,5 +10,7 @@ namespace MicrosoftGraph_Security_API_Sample.Models.Responses
         public double? NonCompliant { get; set; }
 
         public double? Compliant { get; set; }
+
+        public double? NonCompliantPercentage { get; set; }
     }
 }

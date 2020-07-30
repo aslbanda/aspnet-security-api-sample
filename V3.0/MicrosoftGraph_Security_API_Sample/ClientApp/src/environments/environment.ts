@@ -13,7 +13,10 @@ export const environment: IEnvironment = {
     piiLoggingEnabled: true,
     authority: 'https://login.microsoftonline.com/common',
     validateAuthority: true,
-    protectedResourceMap: [['http://localhost:5000/api', ['28535f1e-7b9d-4a93-9be2-e11d2d6412f0']]]
+    protectedResourceMap: [
+      ['https://securitycenter.onmicrosoft.com/windowsatpservice', ['Software.Read']],
+      ['http://localhost:5000/api', ['28535f1e-7b9d-4a93-9be2-e11d2d6412f0']]
+    ]
   }
 };
 

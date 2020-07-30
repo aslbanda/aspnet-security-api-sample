@@ -1040,11 +1040,12 @@ namespace MicrosoftGraph_Security_API_Sample.Services
             if (result != null)
             {
                 var nonCompliant = result.Where(p => p.ComplianceState == ComplianceState.Noncompliant);
-                
+
                 DeviceComplianceResponse response = new DeviceComplianceResponse
                 {
                     NonCompliant = nonCompliant?.Count(),
-                    Compliant = nonCompliant == null ? (double?)null : result.Count - nonCompliant.Count()
+                    Compliant = nonCompliant == null ? (double?)null : result.Count - nonCompliant.Count(),
+                    NonCompliantPercentage = Math.Round(((double)nonCompliant.Count() / (double)result.Count) * 100, 2)
                 };
 
                 return response;

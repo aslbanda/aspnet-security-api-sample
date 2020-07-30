@@ -8,6 +8,6 @@ export interface IEnvironment {
         piiLoggingEnabled: boolean;
         authority: string,
         validateAuthority: boolean,
-        protectedResourceMap: [[string, string[]]]
+        protectedResourceMap: [string, string[]][]
     };
 }
