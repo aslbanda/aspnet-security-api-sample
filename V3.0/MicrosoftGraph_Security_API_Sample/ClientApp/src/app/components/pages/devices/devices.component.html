@@ -3,12 +3,56 @@
       <div class="header-title"> {{ title }} </div>
     </app-content-header>
     <div class="actions">
-      <div class="info-bar">
+      <div class="info-bar">        
         <div class="diagrams">
+          <span style="font-size: 18px">Device Compliance Status</span>
           <div class="doughnut-container">
             <device-doughnut-diagram isDevicePage="true" [doughnutData]="doughnutData">
             </device-doughnut-diagram>
           </div>          
+        </div>
+        <div class="diagrams">
+          <span style="font-size: 18px">Device Score (Secure score for devices)</span>
+          <div class="info">
+            <div class="top">
+              <div>
+                <span>Your Score For Devices - {{deviceScore.deviceScorePercentage}}%</span>
+              </div>
+            </div>
+            <div class="bottom">
+              <div>
+                <span>{{deviceScore.deviceScore}}/{{deviceScore.totalScore}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-bar">
+        <div class="diagrams">
+          <span style="font-size: 18px">Intune Data</span>
+          <div class="doughnut-container">
+
+          </div>
+        </div>
+        <div class="info-panel-50">
+          <span style="font-size: 18px">Top 10 Vulnerable Software</span>
+          <div class="actions-list">
+            <perfect-scrollbar fxFlex>
+              <div class="list-header">
+                <span class="device-list-25-col">Name</span>
+                <span class="device-list-25-col">Vendor</span>
+                <span class="device-list-10-col">Weaknesses</span>
+                <span class="device-list-20-col">Exposed Devices</span>
+                <span class="device-list-20-col">Impact</span>
+              </div>
+              <div>
+                <software-inventory *ngFor="let software of softwares" [software]="software">                
+                </software-inventory>
+              </div>              
+              <!-- <devices-expandable-list *ngFor="let device of devices" [device]="device" [isExpanded]="isExpandedAll">
+              </devices-expandable-list> -->
+            </perfect-scrollbar>
+          </div>
         </div>
       </div>
       <div class="list-toolbar">

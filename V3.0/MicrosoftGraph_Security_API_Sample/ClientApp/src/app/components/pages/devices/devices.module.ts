@@ -15,12 +15,14 @@ import { CommonComponentsModule } from '../../common/common-components.module';
 import {DeviceComponent} from './devices.components';
 import {DevicesListComponent} from './components/devices-expandable-list/devices-expandable-list.component';
 import {DevicesChartComponent} from './components/doughnut-chart/doughnut-chart-component';
+import {SoftwareInventoryComponent} from './components/software-inventory/software-inventory.component';
 import { from } from 'rxjs';
 
 const components = [
     DevicesListComponent,
     DeviceComponent,
-    DevicesChartComponent
+    DevicesChartComponent,
+    SoftwareInventoryComponent
 ];
 
 @NgModule({

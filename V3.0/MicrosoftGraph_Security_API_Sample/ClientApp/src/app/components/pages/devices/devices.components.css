@@ -33,11 +33,37 @@
     border-bottom: 1px solid #E9E9E9;
 }
 
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.top {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.top>div {
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.bottom {
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
 .diagrams {
     flex-grow: 1;
     flex-shrink: 1;
     max-width: 50%;
     border-right: 1px solid #E9E9E9;
+    height: 250px;
 }
 
 .list-toolbar {
@@ -99,6 +125,10 @@
     width: 20%;
 }
 
+.device-list-25-col {
+    width: 25%;
+}
+
 .device-list-10-col {
     width: 10%;
 }
@@ -119,6 +149,15 @@
     display: flex;
     flex-direction: column;
     flex-grow: 2;
+}
+
+.info-panel-50 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    max-width: 50%;
+    height: 250px;
+    overflow: auto;
 }
 
 .info-panel-bar {

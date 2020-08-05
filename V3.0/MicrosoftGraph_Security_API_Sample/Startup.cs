@@ -25,6 +25,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 
 namespace MicrosoftGraph_Security_API_Sample
 {
@@ -75,6 +76,7 @@ namespace MicrosoftGraph_Security_API_Sample
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMemoryCache();
+            services.AddHttpClient();
             services.AddScoped<ITokenProvider, TokenProvider>();
             services.AddScoped<IAlertService, AlertService>();
             services.AddScoped<IActionService, ActionService>();
@@ -86,7 +88,11 @@ namespace MicrosoftGraph_Security_API_Sample
             services.AddScoped<IGraphServiceProvider>(instance =>
                {
                    return new GraphServiceProvider(azureConfiguration: _azureConfiguration);
-               }); ;
+               });
+            services.AddScoped<ISecurityServiceProvider>(instance =>
+            {
+                return new SecurityServiceProvider(_azureConfiguration, (IHttpClientFactory)instance.GetService(typeof(IHttpClientFactory)));
+            });
             services.AddSingleton<IMemoryCacheHelper, MemoryCacheHelper>();
             services.AddSignalR();
 

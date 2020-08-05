@@ -6,6 +6,7 @@
 
 using Microsoft.Graph;
 using MicrosoftGraph_Security_API_Sample.Models.Configurations;
+using MicrosoftGraph_Security_API_Sample.Models.Enums;
 using System.Net.Http.Headers;
 
 namespace MicrosoftGraph_Security_API_Sample.Helpers
@@ -42,11 +43,11 @@ namespace MicrosoftGraph_Security_API_Sample.Helpers
             }
         }
 
-        public static string GetAccessToken(AzureConfiguration azureConfiguration, string jwtToken)
+        public static string GetAccessToken(AzureConfiguration azureConfiguration, string jwtToken, AccessTokenScopes scope = AccessTokenScopes.GraphApi)
         {
             SampleAuthProvider sampleAuthProvider = new SampleAuthProvider();
 
-            return sampleAuthProvider.GetUserAccessTokenAsync(azureConfiguration, jwtToken).Result;
+            return sampleAuthProvider.GetUserAccessTokenAsync(azureConfiguration, jwtToken, scope).Result;
         }
 
         public static void SignOutClient()

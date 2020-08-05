@@ -6,6 +6,7 @@
 
 using Microsoft.Identity.Client;
 using MicrosoftGraph_Security_API_Sample.Models.Configurations;
+using MicrosoftGraph_Security_API_Sample.Models.Enums;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace MicrosoftGraph_Security_API_Sample.Helpers
         }
 
         // Gets an access token. First tries to get the token from the token cache.
-        public async Task<string> GetUserAccessTokenAsync(AzureConfiguration azureConfiguration, string jwtToken)
+        public async Task<string> GetUserAccessTokenAsync(AzureConfiguration azureConfiguration, string jwtToken, AccessTokenScopes scope = AccessTokenScopes.GraphApi)
         {
             try
             {
@@ -43,7 +44,21 @@ namespace MicrosoftGraph_Security_API_Sample.Helpers
                 null,
                 null);
 
-                AuthenticationResult result = await cca.AcquireTokenOnBehalfOfAsync(azureConfiguration.Scope.Split(" "), new UserAssertion(jwtToken));
+                string[] scopes = null;
+
+                switch (scope)
+                {
+                    case AccessTokenScopes.GraphApi:
+                        scopes = azureConfiguration.Scopes.GraphApi.Split(" ");
+                        break;
+                    case AccessTokenScopes.SecurityApi:
+                        scopes = azureConfiguration.Scopes.SecurityApi.Split(" ");
+                        break;
+                    default:
+                        break;
+                }
+
+                AuthenticationResult result = await cca.AcquireTokenOnBehalfOfAsync(scopes, new UserAssertion(jwtToken));
                 return result.AccessToken;
             }
             catch (Exception exception)

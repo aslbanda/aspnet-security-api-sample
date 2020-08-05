@@ -4,6 +4,8 @@ import { BreadcrumbItem } from '../../common/content-header/breadcrumbs/breadcru
 import { ManagedDevice } from '../../../models/graph/managed-device.model';
 import { Queries } from 'src/app/models/response';
 import { DeviceComplianceResponse } from '../../../models/response/device-compliance-model';
+import { SoftwareInventoryResponse } from '../../../models/response/software-inventory-model';
+import { DeviceScore } from '../../../models/response/device-score.model';
 // services
 import { DevicesService } from 'src/app/services/devices.service';
 import { LoaderService } from 'src/app/services/loader.service';
@@ -20,6 +22,8 @@ export class DeviceComponent implements OnInit {
     public devices: ManagedDevice[];
     public isExpandedAll = false;
     public doughnutData: DeviceComplianceResponse;
+    public softwares: SoftwareInventoryResponse[];
+    public deviceScore: DeviceScore;
 
     public title = 'Devices';
     public breadcrumbItems: BreadcrumbItem[] = [
@@ -37,6 +41,8 @@ export class DeviceComponent implements OnInit {
     ngOnInit(): void{
         this.getUserDetails();
         this.getNonCompliantDevices();
+        this.getSoftwareInventory();
+        this.getDeviceScore();
     }
 
     expandAll(): void {
@@ -59,6 +65,20 @@ export class DeviceComponent implements OnInit {
             if(response){
                 this.doughnutData = response;
             }
+        });
+    }
+
+    getSoftwareInventory(): void {
+        this.deviceService.getSoftwareInventory().subscribe(response => {
+            if(response){
+                this.softwares = response;
+            }
+        });
+    }
+
+    getDeviceScore(): void {
+        this.deviceService.getDeviceScore().subscribe(response => {
+            this.deviceScore = response;
         });
     }
 }

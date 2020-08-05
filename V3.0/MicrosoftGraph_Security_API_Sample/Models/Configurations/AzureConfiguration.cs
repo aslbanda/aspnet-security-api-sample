@@ -24,6 +24,10 @@ namespace MicrosoftGraph_Security_API_Sample.Models.Configurations
         /// </summary>
         public string Scope { get; set; }
 
+        /// <summary>Gets or sets the scopes.</summary>
+        /// <value>The scopes.</value>
+        public Scopes Scopes { get; set; }
+
         /// <summary>
         /// Client Secret (Application password) added in the Azure portal in the Keys section for the application
         /// </summary>
@@ -58,5 +62,16 @@ namespace MicrosoftGraph_Security_API_Sample.Models.Configurations
         /// Instance of the settings for this Web application (to be used in controllers)
         /// </summary>
         public static AzureConfiguration Settings { set; get; }
+    }
+
+    public class Scopes
+    {
+        /// <summary>Gets or sets the graph API resource.</summary>
+        /// <value>Graph API resource.</value>
+        public string GraphApi { get; set; }
+
+        /// <summary>Gets or sets the security API resource.</summary>
+        /// <value>The security API resource.</value>
+        public string SecurityApi { get; set; }
     }
 }

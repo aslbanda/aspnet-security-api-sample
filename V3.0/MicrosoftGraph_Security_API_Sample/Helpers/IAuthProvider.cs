@@ -5,12 +5,13 @@
 // -----------------------------------------------------------------------
 
 using MicrosoftGraph_Security_API_Sample.Models.Configurations;
+using MicrosoftGraph_Security_API_Sample.Models.Enums;
 using System.Threading.Tasks;
 
 namespace MicrosoftGraph_Security_API_Sample.Helpers
 {
     public interface IAuthProvider
     {
-        Task<string> GetUserAccessTokenAsync(AzureConfiguration azureConfiguration, string jwtToken);
+        Task<string> GetUserAccessTokenAsync(AzureConfiguration azureConfiguration, string jwtToken, AccessTokenScopes scopes = AccessTokenScopes.GraphApi);
     }
 }
