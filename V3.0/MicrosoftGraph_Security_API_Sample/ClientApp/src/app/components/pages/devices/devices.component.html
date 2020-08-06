@@ -5,14 +5,14 @@
     <div class="actions">
       <div class="info-bar">        
         <div class="diagrams">
-          <span style="font-size: 18px">Device Compliance Status</span>
+          <header class="content-header">Device Compliance Status</header>
           <div class="doughnut-container">
             <device-doughnut-diagram isDevicePage="true" [doughnutData]="doughnutData">
             </device-doughnut-diagram>
           </div>          
         </div>
         <div class="diagrams">
-          <span style="font-size: 18px">Device Score (Secure score for devices)</span>
+          <header class="content-header">Device Score (Secure score for devices)</header>
           <div class="info">
             <div class="top">
               <div>
@@ -29,13 +29,14 @@
       </div>
       <div class="info-bar">
         <div class="diagrams">
-          <span style="font-size: 18px">Intune Data</span>
+          <header class="content-header">Windows Update Status</header>
           <div class="doughnut-container">
-
+            <windows-update-status-doughnut-diagram isDevicePage="true" [doughnutData]="windowsUpdateStatus">
+            </windows-update-status-doughnut-diagram>
           </div>
         </div>
         <div class="info-panel-50">
-          <span style="font-size: 18px">Top 10 Vulnerable Software</span>
+          <header class="content-header">Top 10 Vulnerable Software</header>
           <div class="actions-list">
             <perfect-scrollbar fxFlex>
               <div class="list-header">

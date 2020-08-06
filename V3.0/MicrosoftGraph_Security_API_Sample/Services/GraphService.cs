@@ -1053,5 +1053,31 @@ namespace MicrosoftGraph_Security_API_Sample.Services
 
             return null;
         }
+
+        public async Task<WindowsUpdateStatesResponse> GetWindowsUpdateStatesForChartAsync()
+        {
+            _graphClient.BaseUrl = this.GraphBetaUrl;
+
+            var result = await _graphClient.DeviceManagement.DeviceConfigurations
+                                .Request()
+                                .GetAsync();
+
+            if (result != null)
+            {
+                var filteredids = result.Where(p => p.ODataType == "#microsoft.graph.windowsUpdateForBusinessConfiguration").Select(p => p.Id);
+                foreach (var id in filteredids)
+                {
+                    var deviceUpdateStates = _graphClient.DeviceManagement.DeviceConfigurations[id].DeviceStatusOverview.Request().GetAsync().Result;
+                }
+            }
+
+            return new WindowsUpdateStatesResponse
+            {
+                Failed = 4,
+                PendingInstallation = 2,
+                PendingReboot = 3,
+                UpToDate = 1
+            };
+        }
     }
 }

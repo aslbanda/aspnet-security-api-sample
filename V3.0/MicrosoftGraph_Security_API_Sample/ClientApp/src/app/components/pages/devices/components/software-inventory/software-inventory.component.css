@@ -18,17 +18,17 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 60px;
+    height: 40px;
     font-family: SegoeUI;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 500;
     color: #2D2D2D;
     text-transform: capitalize;
     user-select: none;
 }
 
-.main-container:hover {
-    cursor: pointer;
+/* .main-container:hover {
+    cursor: ;
 }
 
 .main-container>svg {
@@ -41,7 +41,7 @@
     transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
-}
+} */
 
 .expandable-content {
     display: flex;

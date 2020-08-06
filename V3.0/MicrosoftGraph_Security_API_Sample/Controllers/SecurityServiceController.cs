@@ -18,11 +18,15 @@ namespace MicrosoftGraph_Security_API_Sample.Controllers
     public class SecurityServiceController : ControllerBase
     {
         private readonly ISecurityServiceProvider _securityServiceProvider;
+        private readonly IGraphServiceProvider _graphServiceProvider;
         private ISecurityService _securityService;
+        private IGraphService _graphService;
 
-        public SecurityServiceController(ISecurityServiceProvider securityServiceProvider)
+        public SecurityServiceController(ISecurityServiceProvider securityServiceProvider,
+                                         IGraphServiceProvider graphServiceProvider)
         {
             _securityServiceProvider = securityServiceProvider;
+            _graphServiceProvider = graphServiceProvider;
         }
 
         [HttpGet("[action]")]
@@ -85,6 +89,29 @@ namespace MicrosoftGraph_Security_API_Sample.Controllers
 
                 _securityService = _securityServiceProvider.GetService(token);
                 var result = await _securityService.GetDeviceScoreAsync();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetWindowsUpdateStatus()
+        {
+            try
+            {
+                var token = string.Empty;
+
+                if (Request.Headers.ContainsKey("Authorization"))
+                {
+                    token = Request.Headers["Authorization"].ToString()?.Split(" ")?[1];
+                }
+
+                _graphService = _graphServiceProvider.GetService(token);
+                var result = await _graphService.GetWindowsUpdateStatesForChartAsync();
 
                 return Ok(result);
             }

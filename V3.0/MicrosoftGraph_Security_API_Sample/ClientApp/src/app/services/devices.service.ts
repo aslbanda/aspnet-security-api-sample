@@ -6,6 +6,7 @@ import { ManagedDevice } from '../models/graph/managed-device.model';
 import { DeviceComplianceResponse } from '../models/response/device-compliance-model';
 import { SoftwareInventoryResponse } from '../models/response/software-inventory-model';
 import { DeviceScore } from "../models/response/device-score.model";
+import { WindowsUpdateStatuses } from '../models/response/windows-update-status.model';
 
 //services
 import { HttpService } from './http.service';
@@ -30,6 +31,10 @@ export class DevicesService {
     }
 
     getDeviceScore(): Observable<DeviceScore> {
-        return this.http.get<DeviceScore>('security/GetDeviceScoreAsync')
+        return this.http.get<DeviceScore>('security/GetDeviceScoreAsync');
+    }
+
+    getWindowsUpdateStatus(): Observable<WindowsUpdateStatuses> {
+        return this.http.get<WindowsUpdateStatuses>('security/GetWindowsUpdateStatus');
     }
 }

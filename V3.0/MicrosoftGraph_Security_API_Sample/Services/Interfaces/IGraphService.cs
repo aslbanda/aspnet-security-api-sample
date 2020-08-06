@@ -62,5 +62,7 @@ namespace MicrosoftGraph_Security_API_Sample.Services.Interfaces
         Task<IEnumerable<SecureScoreControlProfileModel>> GetSecureScoreControlProfilesAsync();
 
         Task<DeviceComplianceResponse> GetDeviceComplianceForChartAsync();
+
+        Task<WindowsUpdateStatesResponse> GetWindowsUpdateStatesForChartAsync();
     }
 }

@@ -1,0 +1,45 @@
+<div *ngIf="chart"
+  [ngClass]="{'dashboard-diagram-container': isDashboard, 'secure-score-diagram-container': isDevicePage}">
+  <canvas [ngClass]="{'dashboard-nut': isDashboard, 'secure-score-nut': isDevicePage}" baseChart height="100"
+    width="100" [data]="chart.data" [labels]="chart.labels" [chartType]="chart.type" [options]="chart.options"
+    [legend]="chart.legend" [colors]="chart.colors">
+  </canvas>
+  <div class="info">
+    <div class="top">
+      <div>
+        <!-- <span>Non-Compliance</span> -->
+      </div>
+    </div>
+    <div class="bottom">
+      <div>
+        <table class="info-table">
+          <tr>
+            <th>Color</th>
+            <th>Status</th>
+            <th>Device Count</th>
+          </tr>
+          <tr>
+            <td style="background-color: #BF0000;"></td>
+            <td>Failed</td>
+            <td>{{doughnutData.failed}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #A68614;"></td>
+            <td>Pending Installation</td>
+            <td>{{doughnutData.pendingInstallation}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #0C19A6;"></td>
+            <td>Pending Re-Boot</td>
+            <td>{{doughnutData.pendingReboot}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #14A63D;"></td>
+            <td>Up to Date</td>
+            <td>{{doughnutData.upToDate}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { Queries } from 'src/app/models/response';
 import { DeviceComplianceResponse } from '../../../models/response/device-compliance-model';
 import { SoftwareInventoryResponse } from '../../../models/response/software-inventory-model';
 import { DeviceScore } from '../../../models/response/device-score.model';
+import { WindowsUpdateStatuses } from '../../../models/response/windows-update-status.model';
 // services
 import { DevicesService } from 'src/app/services/devices.service';
 import { LoaderService } from 'src/app/services/loader.service';
@@ -24,6 +25,7 @@ export class DeviceComponent implements OnInit {
     public doughnutData: DeviceComplianceResponse;
     public softwares: SoftwareInventoryResponse[];
     public deviceScore: DeviceScore;
+    public windowsUpdateStatus: WindowsUpdateStatuses;
 
     public title = 'Devices';
     public breadcrumbItems: BreadcrumbItem[] = [
@@ -43,6 +45,7 @@ export class DeviceComponent implements OnInit {
         this.getNonCompliantDevices();
         this.getSoftwareInventory();
         this.getDeviceScore();
+        this.getWindowsUpdateStatuses();
     }
 
     expandAll(): void {
@@ -80,5 +83,11 @@ export class DeviceComponent implements OnInit {
         this.deviceService.getDeviceScore().subscribe(response => {
             this.deviceScore = response;
         });
+    }
+
+    getWindowsUpdateStatuses(): void {
+        this.deviceService.getWindowsUpdateStatus().subscribe(response => {
+            this.windowsUpdateStatus = response;
+        })
     }
 }
