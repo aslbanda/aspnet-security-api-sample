@@ -7,7 +7,7 @@
         <div class="diagrams">
           <header class="content-header">Device Compliance Status</header>
           <div class="doughnut-container">
-            <device-doughnut-diagram isDevicePage="true" [doughnutData]="doughnutData">
+            <device-doughnut-diagram (click)="showModal()" isDevicePage="true" [doughnutData]="doughnutData">
             </device-doughnut-diagram>
           </div>          
         </div>
@@ -55,25 +55,33 @@
             </perfect-scrollbar>
           </div>
         </div>
+      </div>      
+    </div>
+    <div id="myModal" [ngClass]="isModalShow ? 'modal-show' : 'modal-hide'">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+        <div class="list-toolbar">
+          <div class="list-toolbar-title">Non-Compliant Devices</div>
+        </div>
+        <div class="actions-list">
+          <perfect-scrollbar fxFlex>
+            <div class="list-header">
+              <span class="device-list-10-col">Device Name</span>
+              <span class="device-list-20-col">User Display Name</span>
+              <span class="device-list-20-col">Last Signed-in</span>
+              <span class="device-list-10-col">Operating System</span>
+              <span class="device-list-20-col">OS Version</span>
+              <span class="device-list-10-col">Device Category</span>
+              <span class="device-list-10-col">Enrollment Type</span>
+              <span class="expand-all" (click)="expandAll()">{{ isExpandedAll ? 'Collapse All' : 'Expand All' }}</span>
+            </div>
+            <devices-expandable-list *ngFor="let device of devices" [device]="device" [isExpanded]="isExpandedAll">
+            </devices-expandable-list>
+          </perfect-scrollbar>
+        </div>
       </div>
-      <div class="list-toolbar">
-        <div class="list-toolbar-title">Non-Compliant Devices</div>
-      </div>
-      <div class="actions-list">
-        <perfect-scrollbar fxFlex>
-          <div class="list-header">
-            <span class="device-list-10-col">Device Name</span>
-            <span class="device-list-20-col">User Display Name</span>
-            <span class="device-list-20-col">Last Signed-in</span>
-            <span class="device-list-10-col">Operating System</span>
-            <span class="device-list-20-col">OS Version</span>
-            <span class="device-list-10-col">Device Category</span>
-            <span class="device-list-10-col">Enrollment Type</span>
-            <span class="expand-all" (click)="expandAll()">{{ isExpandedAll ? 'Collapse All' : 'Expand All' }}</span>
-          </div>
-          <devices-expandable-list *ngFor="let device of devices" [device]="device" [isExpanded]="isExpandedAll">
-          </devices-expandable-list>
-        </perfect-scrollbar>
-      </div>
+    
     </div>
   </div>

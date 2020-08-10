@@ -26,6 +26,7 @@ export class DeviceComponent implements OnInit {
     public softwares: SoftwareInventoryResponse[];
     public deviceScore: DeviceScore;
     public windowsUpdateStatus: WindowsUpdateStatuses;
+    public isModalShow = false;
 
     public title = 'Devices';
     public breadcrumbItems: BreadcrumbItem[] = [
@@ -89,5 +90,13 @@ export class DeviceComponent implements OnInit {
         this.deviceService.getWindowsUpdateStatus().subscribe(response => {
             this.windowsUpdateStatus = response;
         })
+    }
+
+    showModal(): void {
+        this.isModalShow = true;
+    }
+
+    closeModal(): void {
+        this.isModalShow = false;
     }
 }
